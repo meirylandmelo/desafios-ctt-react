@@ -1,0 +1,50 @@
+.section-cart {
+    margin: 0 auto;
+    max-width: 50%;
+    margin-bottom: 60px;
+
+    .section-finish-success {
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        padding: 100px;
+
+        span {
+            color: green;
+        }
+    }
+
+    .section-button-finish {
+        padding: 5px;
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+
+        span {
+            margin-right: 10px;
+        }
+
+        &:hover{
+            color: #fc591f;
+        }
+        
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 50px 0;
+
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        a {
+            color: #000000;
+        }
+    }
+}
