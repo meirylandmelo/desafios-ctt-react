@@ -8,15 +8,22 @@ const Menu = () => {
 
   const token = localStorage.getItem('token')
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:4000/categories', {
+  const getMenu = async () => {
+    try {
+      const request = await axios.get('http://localhost:4000/categories', {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
-      .then((resposta) => setCategories(resposta.data))
-  }, [token])
+      setCategories(request.data)
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+
+  useEffect(() => {
+    getMenu()
+  }, [])
 
   return (
     <nav>
