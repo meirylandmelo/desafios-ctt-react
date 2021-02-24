@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import toast from 'react-hot-toast'
 import { Redirect } from 'react-router-dom'
 import './login.scss'
 
@@ -14,7 +15,7 @@ const Login = () => {
   const [registered, setRegistered] = useState<boolean>(false)
   const [errorAge, setErrorAge] = useState<boolean>(false)
 
-  const register = () => {
+  const register = async () => {
     const request = {
       name: nameUser.current?.value,
       email: emailUser.current?.value,
@@ -24,14 +25,22 @@ const Login = () => {
 
     if (request?.age >= 18) {
       setErrorAge(false)
-
-      axios.post('http://localhost:4000/register', request).then((resposta) => {
+      try {
+        const resposta = await axios.post(
+          'http://localhost:4000/register',
+          request
+        )
         localStorage.setItem('token', resposta.data.accessToken)
 
         if (resposta.data.accessToken) {
           setRegistered(true)
         }
-      })
+      } catch (error) {
+        if (error.response.status === 400) {
+          toast.error('Preencha todos os campos!')
+        }
+        console.log(error.response.status)
+      }
     } else {
       setErrorAge(true)
     }

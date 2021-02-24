@@ -13,15 +13,22 @@ const Home = () => {
 
   const token = localStorage.getItem('token')
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:4000/beers', {
+  const getBeers = async () => {
+    try {
+      const request = await axios.get('http://localhost:4000/beers', {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
-      .then((resposta) => setListProducts(resposta.data))
-  }, [token])
+      setListProducts(request.data)
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+
+  useEffect(() => {
+    getBeers()
+  }, [])
 
   if (!token) {
     return <Redirect to="/" />
