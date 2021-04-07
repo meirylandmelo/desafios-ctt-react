@@ -30,7 +30,7 @@ const Menu = () => {
       <ul>
         {categories.map((item: string, i) => (
           <li key={i}>
-            <a href="#" title={item}>
+            <a href="/home" title={item}>
               {item}
             </a>
           </li>
